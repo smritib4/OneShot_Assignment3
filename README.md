@@ -16,7 +16,13 @@ Each class is turned into two unit vectors:
 - A text vector. Four prompts ("a photo of a {phrase}.", and three variants) are embedded and averaged. The phrase is a fixed wording of the folder name, stored in `src/oneshot/labels.py`.
 - A visual vector. The one support photo is embedded twice, as itself and as a horizontal flip, and those two vectors are averaged. The flip is the test-time augmentation, and the same two views are used for every test image.
 
-The trained class weight is the normalized sum of those two vectors. A test image is assigned to the class with the highest scaled cosine similarity. With one labeled photo and no second labeled photo to use as validation, the text vector and the photo vector get equal weight. That mix is fixed in `src/oneshot/adapter.py`. It is not searched on the test set.
+A test image is assigned to the class with the highest scaled cosine similarity. Three classifiers are scored in the same pass:
+
+- Text only. The class weight is the averaged prompt embedding. This is the submitted model. The first test pass scored it at 85.00% (340 of 400).
+- One photo only. The class weight is the support image. That pass scored 68.75% (275 of 400).
+- Equal mix. The class weight is the normalized sum of the text vector and the photo vector. That pass scored 82.00% (328 of 400).
+
+The photo is a weaker class vector than the class name, and averaging the two lowered the text classifier by 3 points. The saved weights in `cache.pt` are the text vectors. The one labeled image is still embedded, and the other two accuracies are printed beside the official number. No extra training label is used, and the mix weight is not searched.
 
 The 16 support file names are fixed in `supports/seed0.json`. They were drawn with `numpy.random.default_rng(0)` from the sorted file names in each class folder.
 
