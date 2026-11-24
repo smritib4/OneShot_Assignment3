@@ -1,0 +1,17 @@
+true_class,Bedroom,Coast,Flower,Forest,Highway,Industrial,InsideCity,Kitchen,LivingRoom,Mountain,Office,OpenCountry,Store,Street,Suburb,TallBuilding
+Bedroom,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Coast,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Flower,0,0,25,0,0,0,0,0,0,0,0,0,0,0,0,0
+Forest,0,0,1,21,0,0,0,0,0,3,0,0,0,0,0,0
+Highway,0,0,0,0,25,0,0,0,0,0,0,0,0,0,0,0
+Industrial,0,0,0,0,0,21,0,0,0,0,0,0,0,0,0,4
+InsideCity,0,0,0,0,0,0,2,0,0,0,4,0,0,9,1,9
+Kitchen,0,0,0,0,0,0,0,25,0,0,0,0,0,0,0,0
+LivingRoom,0,0,0,0,0,0,0,0,25,0,0,0,0,0,0,0
+Mountain,0,0,0,0,0,0,0,0,0,25,0,0,0,0,0,0
+Office,0,0,0,0,0,0,0,0,1,0,24,0,0,0,0,0
+OpenCountry,0,0,0,0,0,0,0,0,0,10,0,15,0,0,0,0
+Store,1,0,0,0,0,0,0,0,1,0,0,0,23,0,0,0
+Street,0,0,0,0,0,0,1,0,0,0,0,0,0,24,0,0
+Suburb,0,0,0,0,0,0,0,0,6,0,0,0,0,1,18,0
+TallBuilding,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,17

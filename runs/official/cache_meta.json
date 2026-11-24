@@ -1,0 +1,110 @@
+{
+  "model_id": "google/siglip-so400m-patch14-384",
+  "class_names": [
+    "Bedroom",
+    "Coast",
+    "Flower",
+    "Forest",
+    "Highway",
+    "Industrial",
+    "InsideCity",
+    "Kitchen",
+    "LivingRoom",
+    "Mountain",
+    "Office",
+    "OpenCountry",
+    "Store",
+    "Street",
+    "Suburb",
+    "TallBuilding"
+  ],
+  "logit_scale": 112.46659851074219,
+  "support": [
+    {
+      "class_name": "Bedroom",
+      "index": 127,
+      "file_name": "image_0177.jpg"
+    },
+    {
+      "class_name": "Coast",
+      "index": 95,
+      "file_name": "image_0199.jpg"
+    },
+    {
+      "class_name": "Flower",
+      "index": 76,
+      "file_name": "image_0127.jpg"
+    },
+    {
+      "class_name": "Forest",
+      "index": 40,
+      "file_name": "image_0041.jpg"
+    },
+    {
+      "class_name": "Highway",
+      "index": 46,
+      "file_name": "image_0047.jpg"
+    },
+    {
+      "class_name": "Industrial",
+      "index": 6,
+      "file_name": "image_0007.jpg"
+    },
+    {
+      "class_name": "InsideCity",
+      "index": 11,
+      "file_name": "image_0012.jpg"
+    },
+    {
+      "class_name": "Kitchen",
+      "index": 2,
+      "file_name": "image_0003.jpg"
+    },
+    {
+      "class_name": "LivingRoom",
+      "index": 26,
+      "file_name": "image_0027.jpg"
+    },
+    {
+      "class_name": "Mountain",
+      "index": 121,
+      "file_name": "image_0285.jpg"
+    },
+    {
+      "class_name": "Office",
+      "index": 97,
+      "file_name": "image_0105.jpg"
+    },
+    {
+      "class_name": "OpenCountry",
+      "index": 136,
+      "file_name": "image_0342.jpg"
+    },
+    {
+      "class_name": "Store",
+      "index": 75,
+      "file_name": "image_0094.jpg"
+    },
+    {
+      "class_name": "Street",
+      "index": 90,
+      "file_name": "image_0114.jpg"
+    },
+    {
+      "class_name": "Suburb",
+      "index": 145,
+      "file_name": "image_0232.jpg"
+    },
+    {
+      "class_name": "TallBuilding",
+      "index": 109,
+      "file_name": "image_0234.jpg"
+    }
+  ],
+  "templates": [
+    "a photo of a {name}.",
+    "a photo of the {name}.",
+    "an image of a {name}.",
+    "a {name} scene."
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "official_test_accuracy": 0.8500000238418579,
+  "official_test_correct": 340,
+  "official_test_total": 400,
+  "text_only_test_accuracy": 0.8500000238418579,
+  "equal_mix_test_accuracy": 0.8199999928474426,
+  "prototype_only_test_accuracy": 0.6875,
+  "model_id": "google/siglip-so400m-patch14-384",
+  "logit_scale": 112.46659851074219,
+  "seed": 0,
+  "support_file": "/content/OneShot_Assignment3/supports/seed0.json",
+  "visual_weight": 0.0,
+  "training_images_opened": 16,
+  "training_images_listed": 2400,
+  "per_class": [
+    {
+      "class_name": "Bedroom",
+      "correct": 25,
+      "total": 25,
+      "accuracy": 1.0
+    },
+    {
+      "class_name": "Coast",
+      "correct": 25,
+      "total": 25,
+      "accuracy": 1.0
+    },
+    {
+      "class_name": "Flower",
+      "correct": 25,
+      "total": 25,
+      "accuracy": 1.0
+    },
+    {
+      "class_name": "Forest",
+      "correct": 21,
+      "total": 25,
+      "accuracy": 0.84
+    },
+    {
+      "class_name": "Highway",
+      "correct": 25,
+      "total": 25,
+      "accuracy": 1.0
+    },
+    {
+      "class_name": "Industrial",
+      "correct": 21,
+      "total": 25,
+      "accuracy": 0.84
+    },
+    {
+      "class_name": "InsideCity",
+      "correct": 2,
+      "total": 25,
+      "accuracy": 0.08
+    },
+    {
+      "class_name": "Kitchen",
+      "correct": 25,
+      "total": 25,
+      "accuracy": 1.0
+    },
+    {
+      "class_name": "LivingRoom",
+      "correct": 25,
+      "total": 25,
+      "accuracy": 1.0
+    },
+    {
+      "class_name": "Mountain",
+      "correct": 25,
+      "total": 25,
+      "accuracy": 1.0
+    },
+    {
+      "class_name": "Office",
+      "correct": 24,
+      "total": 25,
+      "accuracy": 0.96
+    },
+    {
+      "class_name": "OpenCountry",
+      "correct": 15,
+      "total": 25,
+      "accuracy": 0.6
+    },
+    {
+      "class_name": "Store",
+      "correct": 23,
+      "total": 25,
+      "accuracy": 0.92
+    },
+    {
+      "class_name": "Street",
+      "correct": 24,
+      "total": 25,
+      "accuracy": 0.96
+    },
+    {
+      "class_name": "Suburb",
+      "correct": 18,
+      "total": 25,
+      "accuracy": 0.72
+    },
+    {
+      "class_name": "TallBuilding",
+      "correct": 17,
+      "total": 25,
+      "accuracy": 0.68
+    }
+  ]
+}
