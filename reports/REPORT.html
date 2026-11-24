@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>One Labeled Photo per Class</title>
+<style>
+  @page { size: letter; margin: 0.55in 0.62in; }
+  body { font-family: "Times New Roman", Times, serif; font-size: 10.5pt; line-height: 1.28; color: #111; margin: 0; }
+  h1 { font-size: 14pt; line-height: 1.15; margin: 0 0 2px; }
+  h2 { font-size: 12pt; margin: 9px 0 3px; }
+  p { margin: 0 0 6px; }
+  .meta { margin: 0; }
+  a { color: #111; }
+  table { width: 100%; border-collapse: collapse; margin: 4px 0 6px; }
+  th, td { border: 1px solid #333; padding: 2px 6px; vertical-align: top; text-align: left; }
+  th { background: #f2f2f2; }
+  td.num, th.num { text-align: right; white-space: nowrap; }
+  code { font-family: Consolas, "Courier New", monospace; font-size: 9pt; }
+</style>
+</head>
+<body>
+<h1>One Labeled Photo per Class</h1>
+<p class="meta"><strong>Smriti Bhemireddy</strong> | ITCS 6169/8169 Computer Vision, Assignment 3</p>
+<p class="meta"><strong>GitHub:</strong> <a href="https://github.com/smritib4/OneShot_Assignment3">https://github.com/smritib4/OneShot_Assignment3</a></p>
+
+<h2>1. Maximum accuracy and code</h2>
+<p>The submitted test accuracy is <strong>85.00%</strong> (340 of 400). The encoder is frozen SigLIP SO400M, <code>google/siglip-so400m-patch14-384</code>. Its class weights are the averaged text prompts for the 16 scene names. Each test image is embedded together with its horizontal flip, and the two vectors are averaged before the cosine comparison. The run used one Colab T4. The encoder was not fine-tuned.</p>
+<p>Reproduce that number with <code>python evaluate.py --train-root data/train --test-root data/test --output-dir runs/official</code>. Inference from the saved weights is <code>python predict.py --cache-dir runs/official --image-root data/test</code>. The dataset is the same 2,400 / 400 scene split as Assignments 1 and 2. The support list is <code>supports/seed0.json</code>: one file per class, drawn with <code>numpy.random.default_rng(0)</code> from the sorted file names. The other 2,384 training images are never opened. Test labels are used only to print accuracy.</p>
+<table>
+  <tr><th>Classifier</th><th class="num">Test accuracy</th><th>What the class weight is</th></tr>
+  <tr><td>Text prompts, submitted</td><td class="num">85.00% (340/400)</td><td>Averaged prompt embedding of the class phrase</td></tr>
+  <tr><td>Equal mix</td><td class="num">82.00% (328/400)</td><td>Normalized sum of the phrase and the one photo</td></tr>
+  <tr><td>One photo</td><td class="num">68.75% (275/400)</td><td>The single labeled photo, flip-averaged</td></tr>
+</table>
+
+<h2>2. Foundation model and one-shot recipe</h2>
+<p>SigLIP stays frozen. Each folder name is turned into a short phrase before any test image is scored. <code>InsideCity</code> is "city scene surrounded by buildings," <code>OpenCountry</code> is "open countryside," <code>TallBuilding</code> is "tall building," and the other folders are the obvious words, such as "kitchen" and "highway." Four templates wrap each phrase: "a photo of a {phrase}.", "a photo of the {phrase}.", "an image of a {phrase}.", and "a {phrase} scene." The four embeddings are averaged and L2-normalized. That vector is the submitted class weight. SigLIP's learned logit scale multiplies the cosine, which does not change the argmax and keeps the score in the model's units.</p>
+<p>The one-shot branch uses the same embedding function on the 16 support photos. The photo and a horizontal flip are averaged, so the test-time augmentation matches training. Two extra classifiers are scored in the same forward pass. The photo-only classifier uses that visual vector. The equal-mix classifier uses the normalized sum of the text vector and the visual vector. Equal weight was fixed before the test pass. This assignment allows no second labeled image as a validation set, so there is no legal place to search a mixing coefficient.</p>
+<p>The photo is a worse class vector than the name. One random scene, drawn by a seed rather than picked by hand, cannot cover the layouts inside a class, and the photo-only accuracy is 68.75%. Adding it to a text vector that already scores 85% pulls 12 correct test images onto the wrong side of the boundary. The mix scores 82%. The saved <code>cache.pt</code> therefore stores the text vectors. The 16 photos are still embedded, and both comparison accuracies are printed next to the official line, so the one-shot measurement is part of the reproduction rather than a hidden extra run.</p>
+<p>The errors sit where the English name is ambiguous. Seven classes are perfect: Bedroom, Coast, Flower, Highway, Kitchen, LivingRoom, and Mountain. Office is 24/25, Store 23/25, and Street 24/25. Forest and Industrial are 21/25. The urban and open-layout classes are the rest of the loss: OpenCountry 15/25, Suburb 18/25, TallBuilding 17/25, and InsideCity 2/25. InsideCity is 23 of the 60 errors. The folder name is not a phrase the model already uses, and the paraphrase overlaps street, suburb, and tall-building scenes. A single InsideCity photograph does not repair that overlap, which is why trusting the photo more would not be a free fix. The flip helps small pose changes. It does not invent a boundary the text encoder never had.</p>
+
+<h2>3. Conclusion</h2>
+<p>With one label allowed per class, the foundation model's class name was more accurate than the labeled photograph. The training step that mattered was writing the 16 phrases, averaging four prompts, and flipping each image at test time. The equal-mix rule was the natural way to spend the one labeled photo, and it cost 3 points because that photo was a noisy prototype of a scene. SigLIP already recognizes bedrooms, coasts, and highways. Sixteen photographs do not re-teach it InsideCity. On one free T4, a frozen foundation model plus a prompt ensemble is the practical one-shot system. Training a classifier from those 16 samples would spend the only labels on a representation the text encoder already has.</p>
+</body>
+</html>
