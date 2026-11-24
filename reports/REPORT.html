@@ -71,7 +71,7 @@
 <p>One foundation model and one support seed, so I cannot say whether another SigLIP size or another draw of the 16 photos would move the 3-point gap. The flip is the only test-time adaptation. The encoder is not fine-tuned. The practical balance on one free T4 is a frozen foundation model, four prompts, and a flip, rather than a classifier trained on 16 images. The model is large, the legal training set is 16 photos, and the compute is a few minutes after the checkpoint download. Spending those 16 labels on a new head would re-learn kitchens and highways SigLIP already has, and it would still miss InsideCity.</p>
 
 <h2>6. AI + Human</h2>
-<p>Cursor wrote the embedding code, the Colab cells, and the first draft of this report. The one-label rule, the prompt phrases, and the choice of the submitted row are mine.</p>
+<p>Cursor wrote the embedding code and the Colab cells. The one-label rule, the prompt phrases, and the choice of the submitted row are mine.</p>
 <p>Where I overruled it. Colab could not mount Drive, so I uploaded <code>dataset_scenes.zip</code> and skipped the mount. <code>scripts/prepare_data.py</code> checks the 2,400 and 400 counts. The first saved weights were the equal mix at 82%. The text row in that same run was 85%. I kept the text weights. I did not open the other 2,384 training images to pick a mixing weight.</p>
 </body>
 </html>
